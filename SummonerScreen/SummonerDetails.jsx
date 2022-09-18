@@ -3,16 +3,18 @@ import { ScrollView, View, Text, Image, ActivityIndicator, TouchableOpacity } fr
 import { useRoute } from '@react-navigation/native';
 import { useState, useEffect } from 'react';
 import AxiosService from '../AxiosService';
+import { justifyContent } from 'react-native-wind/dist/styles/flex/justify-content';
 
 const SummonerDetails = ({navigation}) => {
     const [output, setOutput] = useState([]);
     const [isLoading, setIsLoading] = useState(true); 
     const [profile, setProfile] = useState([]);
     const [rank, setRank] = useState([]);
+    
     const route = useRoute();
 
     const imgURL = (champion) =>{ 
-        return 'http://ddragon.leagueoflegends.com/cdn/12.17.1/img/champion/'+champion+'.png'
+        return 'https://ddragon.leagueoflegends.com/cdn/12.17.1/img/champion/'+champion+'.png'
     }
 
     const profileIcon = (id) =>{ 
@@ -122,13 +124,16 @@ const SummonerDetails = ({navigation}) => {
   }
     
     return (
-        <View style={{ flex:1, marginHorizontal: 20, justifyContent:'center'}}>
+        <View style={{ flex:1, marginHorizontal: 20, justifyContent:'center', elevation: 8}}>
             <View style={{ backgroundColor:'#0c1923', borderTopLeftRadius:10, borderTopRightRadius:10, paddingTop:10}}>
                 <Text style={{ fontSize:30, textAlign: 'center', color:'#fff', fontWeight:'bold' }}>{profile.name}</Text>
-                <Image
-                    style={{width: 75, height: 75, alignSelf:'center', borderRadius:50 }}
-                    source={{uri: profileIcon(profile.profileIconId)}}
-                />
+                <View style={{ marginTop: 10, flexDirection:'row', justifyContent:'center' }}>
+                    <Image
+                        style={{width: 75, height: 75, alignSelf:'center', borderRadius:50 }}
+                        source={{uri: profileIcon(profile.profileIconId)}}
+                    />
+                    <Text style={{ fontSize:20, textAlign: 'center', color:'#fff', textAlignVertical:'center', textAlign:'center' }}>  Level: {profile.summonerLevel}</Text>
+                </View>
             </View>
             <View style={{justifyContent:'center', flexDirection: 'row', flexWrap: 'wrap', backgroundColor:'#0c1923' }}>
                 {rank}

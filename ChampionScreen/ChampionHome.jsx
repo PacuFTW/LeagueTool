@@ -8,8 +8,8 @@ export const ChampionHome = ({navigation}) => {
   const [isLoading, setIsLoading] = useState(true); 
 
   const imgURL = (champion) =>{ 
-    return 'http://ddragon.leagueoflegends.com/cdn/12.17.1/img/champion/'+champion+'.png'
-    }
+    return 'https://ddragon.leagueoflegends.com/cdn/12.17.1/img/champion/'+champion+'.png'
+  }
 
   useEffect(() => {
     AxiosService.getChampions()

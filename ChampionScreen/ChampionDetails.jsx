@@ -16,26 +16,33 @@ export const ChampionDetails = () => {
 
     var champarr = [];
     const imgURL = (champion) =>{ 
-        return 'http://ddragon.leagueoflegends.com/cdn/img/champion/loading/'+champion+'_0.jpg'
+        return 'https://ddragon.leagueoflegends.com/cdn/img/champion/loading/'+champion+'_0.jpg'
     }
 
     const imgSpellURL = (ability) => {
-        return 'http://ddragon.leagueoflegends.com/cdn/12.17.1/img/spell/'+ability+'.png'
+        return 'https://ddragon.leagueoflegends.com/cdn/12.17.1/img/spell/'+ability+'.png'
     }
     
     const imgPassiveURL = (name) => {
-        return 'http://ddragon.leagueoflegends.com/cdn/12.17.1/img/passive/'+name;
+        return 'https://ddragon.leagueoflegends.com/cdn/12.17.1/img/passive/'+name;
     }
 
     const handleScroll = (event) => {
         let opacity;
-        if((event.contentOffset.y/240) <= 0.5){
-            opacity = (event.contentOffset.y/240)
+        if((event.contentOffset.y/290) <= 0.5){
+            opacity = (event.contentOffset.y/290)
         }
         else {
             opacity = 0.5;
         }
         setOpacity(opacity);
+    }
+
+    const abilityKey = (i) =>{
+        if (i == 0) return 'Q'
+        else if (i == 1) return 'W'
+        else if (i == 2) return 'E'
+        else return 'R'
     }
 
     useEffect(() => {
@@ -48,13 +55,18 @@ export const ChampionDetails = () => {
             for(let i = 0; i < champarr[0].spells.length;i++){
                 let ability = champarr[0].spells[i];
                 var tempItem = (
-                    <View style={{backgroundColor:'rgba(0,0,0,0.6)', marginTop:20, padding:10 }} key={i}>
-                        <Text style={{ color:'white' }}>{ability.name}</Text>
-                        <Image
-                            style={{width: 50, height: 50}}
-                            source={{uri: imgSpellURL(ability.id)}}
-                            />
-                        <Text style={{ color:'white', textAlign:'justify' }}>{ability.description}</Text>
+                    <View style={{backgroundColor:'rgba(0,0,0,0.6)', marginTop:20, padding:10, borderRadius:10 }} key={i}>
+                        <View style={{ flexDirection:'row', justifyContent:'space-between' }}>
+                            <View style={{ flexDirection:'row' }}>
+                                <Image
+                                    style={{width: 50, height:50, borderRadius:10}}
+                                    source={{uri: imgSpellURL(ability.id)}}
+                                    />
+                                <Text style={{ color:'white', justifyContent:'center', textAlignVertical:'center', fontSize:15, fontWeight:'bold' }}>  {ability.name}</Text>
+                            </View>
+                            <Text style={{ color:'white', textAlign:'right', fontWeight:'bold' }}>{abilityKey(i)}</Text>
+                        </View>
+                        <Text style={{ color:'white', justifyContent:'center', textAlignVertical:'center', fontSize:15, fontWeight:'bold' }}>{ability.description}</Text>
                     </View>
                 );
                 spellOutput.push(tempItem);
@@ -74,13 +86,20 @@ export const ChampionDetails = () => {
             <ScrollView style={{ backgroundColor:'rgba(0,0,0,'+opacity+')' }} scrollEventThrottle={16} onScroll={({nativeEvent}) => {handleScroll(nativeEvent)}}>
                     <View style={{ marginTop: windowHeight, padding:30}}>
                         <Text style={{ fontSize:30, textAlign: 'center', color:'#fff', fontWeight:'bold' }}>{output.name}</Text>
-                        <Text style={{ color:'white' }}>Abilities</Text>
-                        <View style={{backgroundColor:'rgba(0,0,0,0.6)', marginTop:20, padding:10 }}>
-                            <Text style={{ color:'white' }}>{output.passive.name}</Text>
-                            <Image
-                                style={{width: 50, height: 50}}
-                                source={{uri: imgPassiveURL(output.passive.image.full)}}
-                                />
+                        <View style={{backgroundColor:'rgba(0,0,0,0.6)', marginTop:20, padding:10, borderRadius:10 }}>
+                            <Text style={{ color:'white', textAlign:'justify' }}>{output.lore}</Text>
+                        </View>
+                        <View style={{backgroundColor:'rgba(0,0,0,0.6)', marginTop:20, padding:10, borderRadius:10 }}>
+                            <View style={{ flexDirection:'row', justifyContent:'space-between' }}>
+                                <View style={{ flexDirection:'row' }}>
+                                    <Image
+                                        style={{width: 50, height: 50, borderRadius:10}}
+                                        source={{uri: imgPassiveURL(output.passive.image.full)}}
+                                        />
+                                    <Text style={{ color:'white', justifyContent:'center', textAlignVertical:'center', fontSize:15, fontWeight:'bold' }}>  {output.passive.name}</Text>
+                                </View>
+                                <Text style={{ color:'white', textAlign:'right', fontWeight:'bold' }}>Passive</Text>
+                            </View>
                             <Text style={{ color:'white', textAlign:'justify' }}>{output.passive.description}</Text>
                         </View>
                         <View>{spells}</View>
