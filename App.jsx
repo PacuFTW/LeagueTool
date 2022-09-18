@@ -42,8 +42,8 @@ export default function App() {
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Champions" component={ChampionHome} />
         <Stack.Screen name="Summoners" component={SummonerHome} />
-        <Stack.Screen name="Champion Details" component={ChampionDetails} />
-        <Stack.Screen name="Summoner Details" component={SummonerDetails} />
+        <Stack.Screen name="ChampionDetails" component={ChampionDetails} />
+        <Stack.Screen name="SummonerDetails" component={SummonerDetails} />
       </Stack.Navigator>
     </NavigationContainer>
   );
