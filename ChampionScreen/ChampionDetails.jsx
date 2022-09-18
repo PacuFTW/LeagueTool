@@ -29,8 +29,8 @@ export const ChampionDetails = () => {
 
     const handleScroll = (event) => {
         let opacity;
-        if((event.contentOffset.y/290) <= 0.5){
-            opacity = (event.contentOffset.y/290)
+        if((event.contentOffset.y/1000) <= 0.5){
+            opacity = (event.contentOffset.y/1000)
         }
         else {
             opacity = 0.5;

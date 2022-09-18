@@ -12,7 +12,7 @@ class AxiosService {
   }
 
   async getChampionDetail(name){
-    const response = await axios.get('http://ddragon.leagueoflegends.com/cdn/12.17.1/data/en_US/champion/'+name+'.json')
+    const response = await axios.get('https://ddragon.leagueoflegends.com/cdn/12.17.1/data/en_US/champion/'+name+'.json')
     return response.data.data;
   }
 
