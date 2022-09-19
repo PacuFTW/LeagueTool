@@ -86,6 +86,7 @@ export const ChampionDetails = () => {
             <ScrollView style={{ backgroundColor:'rgba(0,0,0,'+opacity+')' }} scrollEventThrottle={16} onScroll={({nativeEvent}) => {handleScroll(nativeEvent)}}>
                     <View style={{ marginTop: windowHeight, padding:30}}>
                         <Text style={{ fontSize:30, textAlign: 'center', color:'#fff', fontWeight:'bold' }}>{output.name}</Text>
+                        <Text style={{ fontSize:25, textAlign: 'center', color:'#fff', fontWeight:'bold' }}>{output.title}</Text>
                         <View style={{backgroundColor:'rgba(0,0,0,0.6)', marginTop:20, padding:10, borderRadius:10 }}>
                             <Text style={{ color:'white', textAlign:'justify' }}>{output.lore}</Text>
                         </View>
